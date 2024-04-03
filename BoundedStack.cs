@@ -24,22 +24,29 @@ namespace OOAP_Homework
         public const int PEEK_OK = 1;
         public const int PEEK_ERR = 2;
 
-        public const int PUSH_NIL = 0;
         public const int PUSH_OK = 1;
         public const int PUSH_ERR = 2;
 
+        // конструктор
+        // постусловие: создан новый пустой стек с дефолтной емкостью.
         public BoundedStack()
         {
             stack = new List<T>();
             Clear();
             this.maxCount = DEFAULT_MAX_COUNT_OF_ELEMENT;
         }
+        // конструктор
+        // постусловие: создан новый пустой стек с определенной вместительностью.
         public BoundedStack(int maxCount)
         {
             stack = new List<T>();
             Clear();
             this.maxCount = maxCount;
         }
+
+        // команды:
+        // предусловие: в стеке менее максимального кол-ва элементов
+        // постусловие: в стек добавлено новое значение
         public void Push(T value)
         {
             if (maxCount == Size())
@@ -51,6 +58,8 @@ namespace OOAP_Homework
             push_status = PUSH_OK;
         }
 
+        // предусловие: стек не пустой; 
+        // постусловие: из стека удалён верхний элемент
         public void Pop()
         {
             if (Size() == 0)
@@ -62,6 +71,7 @@ namespace OOAP_Homework
             pop_status = POP_OK;
         }
 
+        // постусловие: из стека удалятся все значения
         public void Clear()
         {
             stack.Clear();
@@ -70,28 +80,22 @@ namespace OOAP_Homework
             push_status = POP_NIL;
         }
 
+        // запросы:
+        // предусловие: стек не пустой
         public T Peek()
         {
-            T result;
             if (Size() > 0)
             {
-                result = stack[stack.Count() - 1];
                 peek_status = PEEK_OK;
+                return stack[stack.Count() - 1];
             }
-            else
-            {
-                result = default; // дефолтное значение или все же null?
-                peek_status = PEEK_ERR;
-            }
-            return result;
+            peek_status = PEEK_ERR;
+            return default; // default значение или null? Нужно ли обдумывать этот момент не смотря на получение ошибки при выполненной операции.
         }
+        public int Size() => stack.Count();
+        public int MaxSize() => maxCount;
 
-        public int Size()
-        {
-            return stack.Count();
-        }
-
-        // запросы статусов
+        // дополнительные запросы:
         public int Get_pop_status() => pop_status;
         public int Get_peek_status() => peek_status; 
         public int Get_push_status() => push_status; 
