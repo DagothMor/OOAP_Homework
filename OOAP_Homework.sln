@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOAP_Homework", "OOAP_Homework.csproj", "{5C9E84C1-53EE-4222-ABA9-897090464F15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OOAP_Homework", "OOAP_Homework.csproj", "{5C9E84C1-53EE-4222-ABA9-897090464F15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOAP_TESTS", "..\OOAP_TESTS\OOAP_TESTS.csproj", "{F8540722-53CD-4B52-A189-03539DBEAAF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OOAP_TESTS", "OOAP_TESTS\OOAP_TESTS.csproj", "{0CA3B48D-8A20-4070-83B9-A7BD5B3787A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{5C9E84C1-53EE-4222-ABA9-897090464F15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C9E84C1-53EE-4222-ABA9-897090464F15}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C9E84C1-53EE-4222-ABA9-897090464F15}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F8540722-53CD-4B52-A189-03539DBEAAF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F8540722-53CD-4B52-A189-03539DBEAAF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F8540722-53CD-4B52-A189-03539DBEAAF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F8540722-53CD-4B52-A189-03539DBEAAF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CA3B48D-8A20-4070-83B9-A7BD5B3787A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CA3B48D-8A20-4070-83B9-A7BD5B3787A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CA3B48D-8A20-4070-83B9-A7BD5B3787A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CA3B48D-8A20-4070-83B9-A7BD5B3787A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
