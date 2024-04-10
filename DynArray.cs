@@ -19,7 +19,7 @@ namespace OOAP_Homework
         public DynArray()
         {
             count = 0;
-            MakeArray(START_CAPACITY);
+            array = new T[START_CAPACITY];
         }
 
         public const int MAKE_ARRAY_NILL = 0;
@@ -127,7 +127,6 @@ namespace OOAP_Homework
             }
         }
 
-
         public const int REDUCE_ARRAY_NILL = 0;
         public const int REDUCE_ARRAY_OK = 1;
         public const int REDUCE_ARRAY_ERR = 2;
@@ -160,13 +159,14 @@ namespace OOAP_Homework
             _reduceArrayStatus = REDUCE_ARRAY_OK;
             return;
         }
-
-
         public const int INSERT_NILL = 0;
         public const int INSERT_OK = 1;
         public const int INSERT_ERR = 2;
         protected int _insertStatus;
         public int GetInsertStatus() => _insertStatus;
+        // Команда
+        // Предусловие: индекс находится в границах от 0 до количества элементов.
+        // Предусловие: массив не заполнен полностью.
         public void Insert(T itm, int index)
         {
             if (index > count || index < 0 || count == capacity)
@@ -199,6 +199,11 @@ namespace OOAP_Homework
         public const int REMOVE_ERR = 2;
         protected int _removeStatus;
         public int GetRemoveStatus() => _removeStatus;
+
+        // Команда
+        // Предусловие: индекс находится в границах от 0 до количества элементов.
+        // Предусловие: массив не заполнен полностью.
+        // Постусловие: создается новый массив без указанного элемента.
         public void Remove(int index)
         {
             if (index > count - 1 || index < 0)
