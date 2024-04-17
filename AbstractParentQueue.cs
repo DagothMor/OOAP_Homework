@@ -8,42 +8,72 @@ namespace OOAP_Homework
 {
     public abstract class AbstractParentQueue<T>
     {
+        private System.Collections.Generic.LinkedList<T> list { get; set; }
+
         // конструктор
         // постусловие: создана пустая очередь
-        protected AbstractParentQueue()
+        public AbstractParentQueue(System.Collections.Generic.LinkedList<T> list)
         {
-
+            this.list = list;
         }
 
-        // команды
-        // вставка в хвост
-        // предусловие: нет; 
-        // постусловие: Добавлен новый элемент в очередь
-        public abstract void AddTail(T item);
+        public const int GET_ENQUEUE_NILL = 0;
+        public const int GET_ENQUEUE_OK = 1;
+        public const int GET_ENQUEUE_ERR = 2;
+        protected int _getEnqueueStatus;
+        public int GetAddTailStatus() => _getEnqueueStatus;
+        public void AddTail(T item)
+        {
+            if (list == null)
+            {
+                _getEnqueueStatus = GET_ENQUEUE_ERR;
+                return;
+            }
+            _getEnqueueStatus = GET_ENQUEUE_OK;
+            list.AddLast(item);
+        }
 
-        // Удалить элемент из головы
-        // предусловие: очередь не пуста; 
-        // постусловие: Удален элемент из очереди
-        public abstract void RemoveHead();
+        public const int GET_FIRST_ELEMENT_IN_QUEUE_NILL = 0;
+        public const int GET_FIRST_ELEMENT_IN_QUEUE_OK = 1;
+        public const int GET_FIRST_ELEMENT_IN_QUEUE_ERR = 2;
+        protected int _getFirstElementInQueueStatus;
+        public int GetGetHeadStatus() => _getFirstElementInQueueStatus;
 
-        // запросы
-        // Получение первого элемента.
-        // предусловие: очередь не пуста; 
-        public abstract T GetHead();
+        public T GetHead()
+        {
+            if (list.Count == 0)
+            {
+                _getFirstElementInQueueStatus = GET_FIRST_ELEMENT_IN_QUEUE_ERR;
+                return default;
+            }
+            _getFirstElementInQueueStatus = GET_FIRST_ELEMENT_IN_QUEUE_OK;
+            return list.First();
+        }
 
-        // запросы статусов
-        public abstract int GetAddTailStatus(); // успешно; Добавлен новый элемент в очередь
-        public abstract int GetGetHeadStatus(); // успешно; Получен первый элемент в очереди
-        public abstract int GetRemoveHeadStatus(); // успешно; Удален элемент из очереди
+        public const int REMOVE_NILL = 0;
+        public const int REMOVE_OK = 1;
+        public const int REMOVE_ERR = 2;
+        protected int _getRemoveStatus;
+        public int GetRemoveHeadStatus() => _getRemoveStatus;
+        public void RemoveHead()
+        {
+            if (list.Count == 0)
+            {
+                _getRemoveStatus = REMOVE_ERR;
+                return;
+            }
+            _getRemoveStatus = REMOVE_OK;
+            list.RemoveFirst();
+        }
 
-    }
-    public abstract class AbstractQueue<T> : AbstractParentQueue<T>
-    {
-        
     }
 
     public abstract class AbstractDequeue<T> : AbstractParentQueue<T>
     {
+        protected AbstractDequeue(System.Collections.Generic.LinkedList<T> list) : base(list)
+        {
+        }
+
         // команды
         // вставка в голову
         // предусловие: нет; 
@@ -71,60 +101,7 @@ namespace OOAP_Homework
 
         // конструктор
         // постусловие: создана пустая очередь
-        public MyDequeue(System.Collections.Generic.LinkedList<T> list)
-        {
-            this.list = list;
-        }
-
-        public const int GET_ENQUEUE_NILL = 0;
-        public const int GET_ENQUEUE_OK = 1;
-        public const int GET_ENQUEUE_ERR = 2;
-        protected int _getEnqueueStatus;
-        public override int GetAddTailStatus() => _getEnqueueStatus;
-        public override void AddTail(T item)
-        {
-            if (list == null)
-            {
-                _getEnqueueStatus = GET_ENQUEUE_ERR;
-                return;
-            }
-            _getEnqueueStatus = GET_ENQUEUE_OK;
-            list.AddLast(item);
-        }
-
-        public const int GET_FIRST_ELEMENT_IN_QUEUE_NILL = 0;
-        public const int GET_FIRST_ELEMENT_IN_QUEUE_OK = 1;
-        public const int GET_FIRST_ELEMENT_IN_QUEUE_ERR = 2;
-        protected int _getFirstElementInQueueStatus;
-        public override int GetGetHeadStatus() => _getFirstElementInQueueStatus;
-
-        public override T GetHead()
-        {
-            if (list.Count == 0)
-            {
-                _getFirstElementInQueueStatus = GET_FIRST_ELEMENT_IN_QUEUE_ERR;
-                return default;
-            }
-            _getFirstElementInQueueStatus = GET_FIRST_ELEMENT_IN_QUEUE_OK;
-            return list.First();
-        }
-
-        public const int REMOVE_NILL = 0;
-        public const int REMOVE_OK = 1;
-        public const int REMOVE_ERR = 2;
-        protected int _getRemoveStatus;
-        public override int GetRemoveHeadStatus() => _getRemoveStatus;
-        public override void RemoveHead()
-        {
-            if (list.Count == 0)
-            {
-                _getRemoveStatus = REMOVE_ERR;
-                return;
-            }
-            _getRemoveStatus = REMOVE_OK;
-            list.RemoveFirst();
-
-        }
+        public MyDequeue(System.Collections.Generic.LinkedList<T> list) : base(list) { }
 
         public const int GET_ADD_HEAD_NILL = 0;
         public const int GET_ADD_HEAD_OK = 1;
@@ -176,64 +153,10 @@ namespace OOAP_Homework
             list.RemoveLast();
         }
     }
-    public class MyQueue<T> : AbstractQueue<T>
+    public class MyQueue<T> : AbstractParentQueue<T>
     {
-        private System.Collections.Generic.LinkedList<T> list { get; set; }
-
-        // конструктор
-        // постусловие: создана пустая очередь
-        public MyQueue(System.Collections.Generic.LinkedList<T> list)
+        public MyQueue(System.Collections.Generic.LinkedList<T> list) : base(list)
         {
-            this.list = list;
-        }
-
-        public const int GET_ENQUEUE_NILL = 0;
-        public const int GET_ENQUEUE_OK = 1;
-        public const int GET_ENQUEUE_ERR = 2;
-        protected int _getEnqueueStatus;
-        public override int GetAddTailStatus() => _getEnqueueStatus;
-        public override void AddTail(T item)
-        {
-            if (list == null)
-            {
-                _getEnqueueStatus = GET_ENQUEUE_ERR;
-                return;
-            }
-            _getEnqueueStatus = GET_ENQUEUE_OK;
-            list.AddLast(item);
-        }
-
-        public const int GET_FIRST_ELEMENT_IN_QUEUE_NILL = 0;
-        public const int GET_FIRST_ELEMENT_IN_QUEUE_OK = 1;
-        public const int GET_FIRST_ELEMENT_IN_QUEUE_ERR = 2;
-        protected int _getFirstElementInQueueStatus;
-        public override int GetGetHeadStatus() => _getFirstElementInQueueStatus;
-
-        public override T GetHead()
-        {
-            if (list.Count == 0)
-            {
-                _getFirstElementInQueueStatus = GET_FIRST_ELEMENT_IN_QUEUE_ERR;
-                return default;
-            }
-            _getFirstElementInQueueStatus = GET_FIRST_ELEMENT_IN_QUEUE_OK;
-            return list.First();
-        }
-
-        public const int REMOVE_NILL = 0;
-        public const int REMOVE_OK = 1;
-        public const int REMOVE_ERR = 2;
-        protected int _getRemoveStatus;
-        public override int GetRemoveHeadStatus() => _getRemoveStatus;
-        public override void RemoveHead()
-        {
-            if (list.Count == 0)
-            {
-                _getRemoveStatus = REMOVE_ERR;
-                return;
-            }
-            _getRemoveStatus = REMOVE_OK;
-            list.RemoveFirst();
         }
     }
 }
