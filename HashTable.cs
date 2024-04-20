@@ -34,7 +34,7 @@ namespace OOAP_Homework
 
         // Запрос
         // Предусловие: таблица не пуста.
-        public abstract int Find(T Value);
+        public abstract void Find(T Value);
 
         public const int REMOVE_NILL = 0;
         public const int REMOVE_OK = 1;
@@ -54,10 +54,10 @@ namespace OOAP_Homework
         public int step;
         public T[] slots;
 
-        public HashTable(int sz, int stp)
+        public HashTable(int sz)
         {
             size = sz;
-            step = stp;
+            step = 1;
             slots = new T[size];
             for (int i = 0; i < size; i++) slots[i] = default;
         }
@@ -91,7 +91,7 @@ namespace OOAP_Homework
 
         // Запрос
         // Предусловие: таблица не пуста.
-        public override int Find(T value)
+        public override void Find(T value)
         {
             int index = HashFun(value);
             var firstValue = slots[index];
@@ -100,7 +100,7 @@ namespace OOAP_Homework
             if (bufferValue.Equals(value)) 
             {
                 _getFindStatus = GET_FIND_OK;
-                return index;
+                return;
             }
             
             do
@@ -114,17 +114,17 @@ namespace OOAP_Homework
                 if (bufferValue.Equals(default))
                 {
                     _getFindStatus = GET_FIND_ERR;
-                    return -1;
+                    return ;
                 }
 
                 if (bufferValue.Equals(value))
                 {
                     _getFindStatus = GET_FIND_OK;
-                    return index;
+                    return ;
                 }            }
             while (!bufferValue.Equals(firstValue));
 
-            return -1;
+            return;
         }
 
         public const int REMOVE_NILL = 0;
