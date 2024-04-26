@@ -16,6 +16,8 @@ namespace OOAP_Homework
 
         }
 
+        public abstract int Count();
+
         // Команда
         // Предусловие: таблица не заполнена
         // Постусловие: добавлено новое значение в таблицу
@@ -34,7 +36,7 @@ namespace OOAP_Homework
 
         // Запрос
         // Предусловие: таблица не пуста.
-        public abstract void Find(T Value);
+        public abstract bool Find(T Value);
 
         public const int REMOVE_NILL = 0;
         public const int REMOVE_OK = 1;
@@ -61,6 +63,7 @@ namespace OOAP_Homework
             slots = new T[size];
             for (int i = 0; i < size; i++) slots[i] = default;
         }
+
 
 
         // Команда
@@ -91,7 +94,7 @@ namespace OOAP_Homework
 
         // Запрос
         // Предусловие: таблица не пуста.
-        public override void Find(T value)
+        public override bool Find(T value)
         {
             int index = HashFun(value);
             var firstValue = slots[index];
@@ -100,7 +103,7 @@ namespace OOAP_Homework
             if (bufferValue.Equals(value)) 
             {
                 _getFindStatus = GET_FIND_OK;
-                return;
+                return true;
             }
             
             do
@@ -114,17 +117,17 @@ namespace OOAP_Homework
                 if (bufferValue.Equals(default))
                 {
                     _getFindStatus = GET_FIND_ERR;
-                    return ;
+                    return false;
                 }
 
                 if (bufferValue.Equals(value))
                 {
                     _getFindStatus = GET_FIND_OK;
-                    return ;
+                    return true;
                 }            }
             while (!bufferValue.Equals(firstValue));
 
-            return;
+            return false;
         }
 
         public const int REMOVE_NILL = 0;
