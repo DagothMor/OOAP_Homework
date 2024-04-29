@@ -175,5 +175,10 @@ namespace OOAP_Homework
             while (bufferValue.Equals(firstValue));
             return -1;
         }
+
+        public override int Count()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
